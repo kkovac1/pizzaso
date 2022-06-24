@@ -1,0 +1,15 @@
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 35rem;
+}
+
+.login-btn {
+    border: 1px solid #DBDBDB;
+    border-radius: 36px;
+    background: transparent;
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+}
