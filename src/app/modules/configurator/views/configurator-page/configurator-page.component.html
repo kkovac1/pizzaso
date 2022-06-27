@@ -1,10 +1,10 @@
 <app-toolbar></app-toolbar>
 <div class="configurator-container">
-    <section class="toppings-toppings">
+    <section id="toppings-toppings">
         <h2>Toppings! Toppings!</h2>
         <div class="toppings">
             <div (click)="selectTopping(topping)" [class.topping-selected]="selectedToppings.includes(topping)"
-                class="topping" *ngFor="let topping of toppings | async">
+                class="topping" *ngFor="let topping of toppings$ | async">
                 <span class="topping-icon">{{ topping.icon }}</span>
                 <span>{{ topping.name }}</span>
             </div>
@@ -12,28 +12,35 @@
         <span>Total price +{{ toppingsTotalPrice | currency: 'USD' }}</span>
     </section>
 
-    <section class="pizza-pizza flex flex-column align-items-center">
+    <section id="pizza-pizza" class="flex flex-column align-items-center">
         <h2>Pizza! Pizza! size</h2>
         <div class="pizza-size-container flex align-items-center">
-            <div [class.active-size]="size.active" (click)="size.active = !size.active" *ngFor="let size of pizzaSizes | async">{{size.name}}</div>
+            <div class="pizza-size" [class.active-size]="activeSize === size.name" (click)="setupActiveSize(size)"
+                *ngFor="let size of pizzaSizes$ | async">{{size.name}}</div>
+            <div class="slide"></div>
         </div>
     </section>
 
-    <section class="discount flex flex-column align-items-center">
+    <section id="discount" class="flex flex-column align-items-center">
         <h2>Get the discount</h2>
-        <input class="discount-code" type="text" placeholder="Enter the discount code">
+        <div class="discount-input-container">
+            <input class="discount-code" type="text" placeholder="Enter the discount code">
+            <button>Apply</button>
+        </div>
     </section>
 
-    <section class="checkout">
+    <section id="checkout">
         <img class="pizza-icon" src="/assets/pizza.svg">
         <div class="flex align-items-center">
             <div class="flex flex-column align-items-center">
-                <input class="qty-input" value="1">
+                <input #qty class="qty-input" value="1">
                 <span class="checkout-span">QTY</span>
             </div>
 
-            <div class="flex flex-column align-items-center">
-                <span id="price">$22.50</span>
+            <div class="separator"></div>
+
+            <div style="margin-right: 1rem" class="flex flex-column align-items-center">
+                <span id="price">{{ (toppingsTotalPrice + pizzaSizePrice ) | currency:'USD'}}</span>
                 <span class="checkout-span">ORDER TOTAL</span>
             </div>
         </div>

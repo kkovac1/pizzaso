@@ -1,9 +1,14 @@
-
 .toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 35rem;
+
+    h4,
+    svg {
+        cursor: pointer;
+    }
+
 }
 
 .login-btn {
@@ -12,4 +17,15 @@
     background: transparent;
     padding: 0.5rem 2rem;
     cursor: pointer;
+    text-decoration: none;
+    transition: background-color .3s;
+
+    &:visited {
+        color: black;
+    }
+
+    &:hover {
+        background-color: #eeeeee;
+    }
+
 }

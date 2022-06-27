@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ConfiguratorPageComponent } from './views/configurator-page/configurator-page.component';
 import { ConfiguratorRoutingModule } from './configurator-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { ConfiguratorService } from './services/configurator.service';
 
 
 
@@ -14,6 +15,9 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     ConfiguratorRoutingModule,
     SharedModule
+  ],
+  providers: [
+    ConfiguratorService
   ]
 })
 export class ConfiguratorModule { }
