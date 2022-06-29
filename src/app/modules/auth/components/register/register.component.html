@@ -1,0 +1,11 @@
+<app-toolbar></app-toolbar>
+<div [formGroup]="registerForm" class="container flex flex-column align-items-center justify-content-center">
+    <h2>Register</h2>
+    <input id="firstName" formControlName="firstName" placeholder="First name">
+    <input id="lastName" formControlName="lastName" placeholder="Last name">
+    <input id="email" formControlName="email" placeholder="E-mail">
+    <input id="password" formControlName="password" placeholder="Password" type="password">
+    <a routerLink="/login">Already registered? Sign in</a>
+
+    <button (click)="register()">Register</button>
+</div>

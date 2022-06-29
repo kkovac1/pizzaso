@@ -56,6 +56,7 @@
     .pizza-size-container {
         background: #ECECF3;
         border-radius: 72px;
+        width: 24rem;
 
         .pizza-size {
             padding: .8rem 2.5rem;
@@ -63,6 +64,8 @@
             border: none;
             cursor: pointer;
             margin: .5rem .5rem;
+            width: 8rem;
+            text-align: center;
         }
 
         .active-size {
@@ -81,7 +84,7 @@
     .discount-code {
         background: #ECECF3;
         border-radius: 72px;
-        font-size: 20px;
+        font-size: 18px;
         border: none;
     }
 
@@ -91,7 +94,7 @@
         padding: 0.5rem 0.5rem .5rem 1.5rem;
         background: #ECECF3;
         border-radius: 72px;
-
+        width: 24rem;
 
         input {
             flex-grow: 2;
@@ -117,7 +120,7 @@
 
 #checkout {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     position: relative;
     background: rgba(255, 255, 255, 0.9);
@@ -141,7 +144,6 @@
     }
 
     .buy-pizza-btn {
-        float: right;
         background: #B95DE4;
         color: white;
         border-radius: 48px;
@@ -149,11 +151,10 @@
         padding: 0 2.5rem;
         cursor: pointer;
         border: none;
-        margin-right: 2rem;
         transition: .2s;
 
         &:hover {
-            background: #9e46c8;
+            background: #d069ff;
         }
     }
 
@@ -177,10 +178,15 @@
         }
     }
 
+    .qty-input::-webkit-outer-spin-button,
+    .qty-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
     #price {
         // font-size: 24px;
         color: #B95DE4;
+        font-weight: bold;
     }
-
-
 }

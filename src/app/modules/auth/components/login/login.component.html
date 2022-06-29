@@ -1,0 +1,13 @@
+<app-toolbar></app-toolbar>
+
+<div [formGroup]="loginForm" class="container flex flex-column align-items-center justify-content-center">
+    <h2>Login</h2>
+    <input id="email" formControlName="email" placeholder="E-mail" type="email">
+    <!-- <span class="text-danger" *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.hasError('email')">Required</span> -->
+    <input id="password" formControlName="password" placeholder="Password" type="password">
+    <a routerLink="/register">Not registered? Click here</a>
+
+    <button (click)="signInWithGoogle()">Sign in with Google</button>
+    <button (click)="signInWithGoogle()">Sign in with Facebook</button>
+    <button (click)="signInWithEmailAndPassword()">Login</button>
+</div>

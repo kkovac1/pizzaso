@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
+import { AuthModule } from './modules/auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { environment } from 'src/environments/environment';
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule.enablePersistence(),
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

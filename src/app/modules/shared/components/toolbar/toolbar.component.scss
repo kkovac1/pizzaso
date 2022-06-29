@@ -2,16 +2,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 35rem;
-
+    // width: 35rem;
+    min-width: 35rem;
     h4,
     svg {
         cursor: pointer;
     }
 
+    svg {
+        &:focus {
+            outline: none;
+        }
+    }
+
 }
 
-.login-btn {
+.login-logout-btn {
     border: 1px solid #DBDBDB;
     border-radius: 36px;
     background: transparent;
@@ -19,6 +25,7 @@
     cursor: pointer;
     text-decoration: none;
     transition: background-color .3s;
+    font-size: 14px;
 
     &:visited {
         color: black;

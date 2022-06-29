@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map, Observable, of, shareReplay, tap } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
+import { IFormBuilder, IFormGroup } from '@rxweb/types';
+import { Observable } from 'rxjs';
 import { PizzaSize } from '../../models/PizzaSize';
 import { Topping } from '../../models/Topping';
 import { ConfiguratorService } from '../../services/configurator.service';
@@ -12,32 +13,33 @@ import { ConfiguratorService } from '../../services/configurator.service';
 })
 export class ConfiguratorPageComponent implements OnInit {
 
+  private formBuilder: IFormBuilder;
+  public orderForm: IFormGroup<any>;
+
   public toppings$: Observable<Topping[]>;
   public pizzaSizes$: Observable<PizzaSize[]>
-
-  public pizzaSizes: Observable<any> = of([
-    { name: "S", price: 5, active: false },
-    { name: "M", price: 10, active: false },
-    { name: "L", price: 15, active: false },
-  ])
 
   public activeSize = "S";
   public toppingsTotalPrice: number = 0;
   public selectedToppings: Topping[] = [];
   public pizzaSizePrice: number = 5;
 
+  public discount = 0;
 
   constructor(
-    private configuratorService: ConfiguratorService
+    private configuratorService: ConfiguratorService,
+    formBuilder: FormBuilder
   ) {
+    this.formBuilder = formBuilder;
+    this.orderForm = this.formBuilder.group<any>({
+      quantity: [1],
+      pizzaSize: ['M'],
+      toppings: [""]
+    });
+
     this.toppings$ = this.configuratorService.getToppings();
     this.pizzaSizes$ = this.configuratorService.getPizzaSizes();
-    // fbs.collection("toppings").doc("corn").set({
-    //   id: 3, name: "Corn", price: 1, icon: "🌽"
-    // });
-
   }
-
 
   ngOnInit(): void {
   }
@@ -57,8 +59,12 @@ export class ConfiguratorPageComponent implements OnInit {
   public setupActiveSize(pizza: PizzaSize) {
     this.activeSize = pizza.name;
     this.pizzaSizePrice = pizza.price;
-    
   }
 
-
+  getDiscount(code: string) {
+    this.configuratorService.getDiscount(code).subscribe(res => {
+      if (res) this.discount = res.percentage / 100;
+      else window.alert("Code doesn't exist")
+    });
+  }
 }
