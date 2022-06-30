@@ -1,15 +1,12 @@
 <app-toolbar></app-toolbar>
-<div class="configurator-container">
-    <section id="toppings-toppings">
+<div [formGroup]="orderForm" class="configurator-container flex flex-column align-items-center">
+    <section id="toppings-toppings" class="flex flex-column align-items-center">
         <h2>Toppings! Toppings!</h2>
-        <div class="toppings">
-            <div (click)="selectTopping(topping)" [class.topping-selected]="selectedToppings.includes(topping)"
-                class="topping" *ngFor="let topping of toppings$ | async">
-                <span class="topping-icon">{{ topping.icon }}</span>
-                <span>{{ topping.name }}</span>
-            </div>
+        <div class="flex">
+            <app-topping (click)="selectTopping(topping)" *ngFor="let topping of toppings$ | async" [topping]="topping"
+                [selected]="selectedToppings.includes(topping)"></app-topping>
         </div>
-        <span>Total price +{{ toppingsTotalPrice | currency: 'USD' }}</span>
+        <span>Total price +{{ toppingsPrice | currency: 'USD' }}</span>
     </section>
 
     <section id="pizza-pizza" class="flex flex-column align-items-center">
@@ -23,8 +20,9 @@
 
     <section id="discount" class="flex flex-column align-items-center">
         <h2>Get the discount</h2>
-        <div class="discount-input-container">
-            <input #code (keyup.enter)="getDiscount(code.value)" class="discount-code" type="text" placeholder="Enter the discount code">
+        <div class="discount-input-container flex align-items-center">
+            <input #code (keyup.enter)="getDiscount(code.value)" class="discount-code" type="text"
+                placeholder="Enter the discount code">
             <button (click)="getDiscount(code.value)">Apply</button>
         </div>
     </section>
@@ -33,18 +31,18 @@
         <img class="pizza-icon" src="/assets/pizza.svg">
         <div style="margin-left: 5rem;" class="flex align-items-center">
             <div class="flex flex-column align-items-center">
-                <input #qty class="qty-input" min="1" max="10" value="1" type="number">
+                <input formControlName="quantity" class="qty-input" type="number">
                 <span class="checkout-span">QTY</span>
             </div>
 
             <div class="separator"></div>
 
             <div style="margin-right: 1rem" class="flex flex-column align-items-center">
-                <span id="price">{{ (toppingsTotalPrice + pizzaSizePrice) - ((toppingsTotalPrice + pizzaSizePrice) * discount) | currency:'USD'}}</span>
+                <span class="price">{{ totalPrice | currency:'USD'}}</span>
                 <span class="checkout-span">ORDER TOTAL</span>
             </div>
         </div>
-
-        <button class="buy-pizza-btn">Buy Pizza! Pizza!</button>
+        
+        <a [routerLink]="['order-details']" (click)="goToOrderDetails()" class="btn-buy-pizza">Buy Pizza! Pizza!</a>
     </section>
 </div>

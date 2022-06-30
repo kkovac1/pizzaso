@@ -1,4 +1,4 @@
-export type PizzaSize = {
+export interface PizzaSize {
     name: string;
     price: number;
 }

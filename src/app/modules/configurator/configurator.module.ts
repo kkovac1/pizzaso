@@ -4,12 +4,18 @@ import { ConfiguratorPageComponent } from './views/configurator-page/configurato
 import { ConfiguratorRoutingModule } from './configurator-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ConfiguratorService } from './services/configurator.service';
+import { OrderDetailsPageComponent } from './views/order-details-page/order-details-page.component';
+import { ToppingComponent } from './components/topping/topping.component';
+import { OrderSuccessfulPageComponent } from './views/order-successful-page/order-successful-page.component';
 
 
 
 @NgModule({
   declarations: [
     ConfiguratorPageComponent,
+    OrderDetailsPageComponent,
+    ToppingComponent,
+    OrderSuccessfulPageComponent,
   ],
   imports: [
     CommonModule,

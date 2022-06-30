@@ -1,0 +1,32 @@
+.topping {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background: #FFFFFF;
+    border: 1px solid #F2F2F2;
+    box-shadow: 0px 12px 16px rgba(0, 0, 0, 0.03);
+    border-radius: 56px;
+    height: 8rem;
+    width: 5rem;
+    margin: 0.5rem 0.5rem;
+    cursor: pointer;
+    transition: .2s;
+
+    span {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .topping-icon {
+        padding: 1.5rem;
+        box-shadow: 0px 12px 28px rgba(0, 0, 0, 0.03);
+        border-radius: 50%;
+        transform: translateY(-12px);
+    }
+}
+
+.topping-selected {
+    background: #E5C3F5;
+}

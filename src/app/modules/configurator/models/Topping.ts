@@ -1,4 +1,4 @@
-export type Topping = {
+export interface Topping {
     name: string;
     icon: string;
     price: number;

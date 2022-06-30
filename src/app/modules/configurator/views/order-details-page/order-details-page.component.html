@@ -1,0 +1,55 @@
+<app-toolbar></app-toolbar>
+
+<div *ngIf="orderForm" [formGroup]="orderForm" class="fixed-center form-container">
+    <h2 style="text-align: center">Almost done!</h2>
+    <div class="grid-container">
+        <div class="col">
+            <div class="order-details">
+                <h3>Order details</h3>
+                <div>
+                    <p>Toppings</p>
+                    <span>{{ displayToppings(orderForm.value!.toppings) }}</span>
+                    <div>QTY: {{ orderForm.value!.quantity }}</div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="order-details">
+                <span>Delivery</span>
+                <br>
+                <span style="font-size: 14px;">Free delivery withing 1hour or you don’t have to pay.</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="discount-input-container flex align-items-center">
+                <input #code (keyup.enter)="getDiscount(code.value)" class="discount-code" type="text" placeholder="Enter the discount code">
+                <button id="apply" (click)="getDiscount(code.value)">Apply</button>
+            </div>
+
+            <div class="total-price flex align-items-end justify-content-between">
+                <span>Total price</span>
+                <span class="price">{{ totalPrice | currency: 'USD'}}</span>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="shipping-information">
+                <h3>Shipping information</h3>
+                <input id="street" formControlName="street" placeholder="Street name and number">
+                <input id="city" formControlName="city" placeholder="City">
+                <input id="postalCode" formControlName="postalCode" placeholder="Postal Code">
+                <input id="county" formControlName="county" placeholder="County">
+                <h3 style="margin: 0;">Payment details</h3>
+                <span>Cash on delivery</span>
+            </div>
+            
+            <div class="divider"></div>
+
+            <div class="shipping-information">
+                <button id="finishOrder" (click)="finishOrder()">Finish order</button>
+            </div>
+        </div>
+    </div>
+</div>

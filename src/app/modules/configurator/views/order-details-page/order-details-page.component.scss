@@ -1,0 +1,66 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 1rem;
+}
+
+.col {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.order-details {
+    padding: 0 1rem;
+
+    p {
+        color: #8C8C8C;
+        letter-spacing: 1.25px;
+        text-transform: uppercase;
+        margin: 0;
+    }
+
+    span {
+        color: #979797;
+    }
+}
+
+.total-price{
+    margin: 1rem 0;
+    padding: 0 1rem;
+
+    span:nth-child(1) {
+        color: #8C8C8C;
+    }
+    
+    span:nth-child(2) {
+        font-size: 24px;
+    }
+}
+
+.divider {
+    margin: 1rem 0;
+    border: 1px dashed #DBDBDB;
+}
+
+.shipping-information {
+    padding: 0 1rem;
+
+    #street, #county {
+        width: 16rem;
+    }
+
+    #city, #postalCode {
+        width: 6.5rem;
+    }
+
+    #postalCode {
+        margin-left: 1rem;
+    }
+
+    #finishOrder {
+        width: 18rem;
+    }
+}
+
+.discount-input-container {
+    width: 18rem;
+}
