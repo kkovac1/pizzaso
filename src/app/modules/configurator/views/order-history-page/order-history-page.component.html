@@ -1,0 +1,16 @@
+<app-toolbar></app-toolbar>
+
+<div class="flex flex-column align-items-center form-container fixed-center">
+    <h2>Order history</h2>
+    <div style="width: 100%;">
+        <div class="order-item flex justify-content-between" *ngFor="let order of orders$ | async">
+            <span>{{order.quantity}}x {{order.pizzaSize.name}} Pizza! Pizza!</span>
+            <div>
+                <span>{{ order.orderedAt.toDate() | date : 'dd.MM.yy. HH:mm:ss' }}</span>
+                <i (click)="openDialog(order)" class="bi bi-info-circle"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-dialog></app-dialog>

@@ -33,10 +33,12 @@ export class ConfiguratorPageComponent implements OnInit {
       pizzaSize: this.formBuilder.group<PizzaSize>({ name: "S", price: 5 }),
       toppings: this.formBuilder.array<Topping>([]),
       discount: this.formBuilder.group<Discount>({ code: "", active: true, percentage: 0 }),
-      street: [''],
-      city: [''],
-      county: [''],
-      postalCode: ['']
+      street: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      county: ['', [Validators.required]],
+      postalCode: ['', [Validators.required]],
+      orderedAt: null,
+      totalPrice: [0]
     });
 
     this.toppings$ = this.configuratorService.getToppings();
@@ -80,18 +82,19 @@ export class ConfiguratorPageComponent implements OnInit {
     return this.toppingsArray.value.reduce((acc, cur) => acc + cur.price, 0);
   }
 
-  public get totalPrice () {
+  public get totalPrice() {
     var toppingsTotalPrice = this.toppingsArray.value.reduce((acc, cur) => acc + cur.price, 0);
     var pizzaPrice = this.orderForm.get('pizzaSize')?.value?.price!;
     var discount = this.orderForm.get('discount')?.value?.percentage! / 100;
     var quantity = this.orderForm?.get('quantity')?.value!;
     var totalPrice = ((toppingsTotalPrice + pizzaPrice) - (toppingsTotalPrice + pizzaPrice) * discount) * quantity;
-    
+
     return totalPrice;
   }
 
   goToOrderDetails() {
     console.log(this.orderForm.value);
+    this.orderForm.get('totalPrice')?.setValue(this.totalPrice);
     this.configuratorService.sendOrderForm(this.orderForm);
     // this.configuratorService.sendOrderData(this.orderForm.value!);
   }

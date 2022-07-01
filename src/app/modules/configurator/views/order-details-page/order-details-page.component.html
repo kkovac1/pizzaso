@@ -8,7 +8,7 @@
                 <h3>Order details</h3>
                 <div>
                     <p>Toppings</p>
-                    <span>{{ displayToppings(orderForm.value!.toppings) }}</span>
+                    <span class="toppings">{{ displayToppings(orderForm.value!.toppings) }}</span>
                     <div>QTY: {{ orderForm.value!.quantity }}</div>
                 </div>
             </div>
@@ -37,10 +37,10 @@
         <div class="col">
             <div class="shipping-information">
                 <h3>Shipping information</h3>
-                <input id="street" formControlName="street" placeholder="Street name and number">
-                <input id="city" formControlName="city" placeholder="City">
-                <input id="postalCode" formControlName="postalCode" placeholder="Postal Code">
-                <input id="county" formControlName="county" placeholder="County">
+                <input id="street" formControlName="street" [class.invalid]="orderForm.controls.street.invalid && (orderForm.controls.street.dirty || orderForm.controls.street.touched)" placeholder="Street name and number*">
+                <input id="city" formControlName="city" [class.invalid]="orderForm.controls.city.invalid && (orderForm.controls.city.dirty || orderForm.controls.city.touched)" placeholder="City*">
+                <input id="postalCode" formControlName="postalCode" [class.invalid]="orderForm.controls.postalCode.invalid && (orderForm.controls.postalCode.dirty || orderForm.controls.postalCode.touched)" placeholder="Postal Code*">
+                <input id="county" formControlName="county" [class.invalid]="orderForm.controls.county.invalid && (orderForm.controls.county.dirty || orderForm.controls.county.touched)" placeholder="County*">
                 <h3 style="margin: 0;">Payment details</h3>
                 <span>Cash on delivery</span>
             </div>
@@ -48,7 +48,7 @@
             <div class="divider"></div>
 
             <div class="shipping-information">
-                <button id="finishOrder" (click)="finishOrder()">Finish order</button>
+                <button id="finishOrder" class="btn-primary" [disabled]="!orderForm.valid" (click)="finishOrder()">Finish order</button>
             </div>
         </div>
     </div>

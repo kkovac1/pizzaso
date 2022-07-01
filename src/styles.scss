@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import "~bootstrap-icons/font/bootstrap-icons.css";
 
-$btn-color: #B95DE4;
+$primary-color: #B95DE4;
 
 body,
 html {
@@ -52,6 +53,31 @@ body {
     transform: translate(-50%, -50%);
 }
 
+.divider {
+    margin: 1rem 0;
+    border: 1px dashed #DBDBDB;
+}
+
+.btn-primary {
+    background: $primary-color;
+    color: white;
+    border-radius: 48px;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    border: none;
+    transition: .2s;
+    text-decoration: none;
+
+    &:hover {
+        background: #d069ff;
+    }
+
+    &:disabled {
+        cursor: default;
+        background-color: #DBDBDB;
+    }
+}
+
 .form-container {
     background: #FFFFFF;
     border: 1px solid #F7F7F7;
@@ -75,21 +101,15 @@ body {
             outline: none;
         }
     }
+}
 
-    button:not(#apply) {
-        background: #B95DE4;
+.registered {
+    margin-bottom: 1rem;
+    text-decoration: none;
+    color: black;
 
-        border-radius: 36px;
-        color: white;
-        padding: 1rem 0;
-        cursor: pointer;
-        border: none;
-        width: 20rem;
-        transition: background .2s;
-
-        &:hover {
-            background: #d069ff;
-        }
+    &:hover {
+        text-decoration: underline;
     }
 }
 
@@ -122,6 +142,6 @@ body {
 
 .price {
     // font-size: 24px;
-    color: #B95DE4;
+    color: $primary-color;
     font-weight: bold;
 }

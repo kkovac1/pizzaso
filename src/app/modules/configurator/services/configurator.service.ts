@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { IFormGroup } from '@rxweb/types';
-import { BehaviorSubject, map, Observable, shareReplay, Subject, tap } from 'rxjs';
+import { BehaviorSubject, from, map, Observable, shareReplay, Subject, tap } from 'rxjs';
+import { AuthService } from '../../shared/services/auth.service';
 import { Discount } from '../models/Discount';
 import { Order } from '../models/Order';
 import { PizzaSize } from '../models/PizzaSize';
@@ -13,25 +13,13 @@ import { Topping } from '../models/Topping';
 })
 export class ConfiguratorService {
 
-  // private orderData: BehaviorSubject<Order | null> = new BehaviorSubject<Order | null>(null);
-  // public orderData$: Observable<Order | null> = this.orderData.asObservable();
-
   private orderData: BehaviorSubject<IFormGroup<Order> | null> = new BehaviorSubject<IFormGroup<Order> | null>(null);
   public orderData$: Observable<IFormGroup<Order> | null> = this.orderData.asObservable();
 
   constructor(
     private afs: AngularFirestore,
-    private afauth: AngularFireAuth
   ) {
-    this.orderData$.subscribe(res => {
-      console.log(res);
-
-    })
   }
-
-  // sendOrderData(data: Order) {
-  //   this.orderData.next(data);
-  // }
 
   sendOrderForm(data: IFormGroup<Order>) {
     this.orderData.next(data);
@@ -55,8 +43,12 @@ export class ConfiguratorService {
     return this.afs.doc<Discount>(`discount-codes/${code}`).valueChanges();
   }
 
-  saveOrderData(order: Order) {
+  saveOrderData(order: Order, uid: string) {
     let documentId = this.afs.createId();
-    return this.afs.doc(`order-history/orders/username/${documentId}`).set(order);
+    this.afs.doc(`order-history/orders/${uid}/${documentId}`).set(order);
+  }
+
+  getUserOrderHistory(uid: string) {
+    return this.afs.collection<Order>(`order-history/orders/${uid}`).valueChanges();
   }
 }

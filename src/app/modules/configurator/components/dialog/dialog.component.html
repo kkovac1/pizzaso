@@ -1,0 +1,51 @@
+<ng-container *ngIf="dialog$ | async as dialog">
+    <section [class.open]="dialog.open === true" (click)="close()">
+        <div (click)="$event.stopPropagation()">
+            <i (click)="close()" class="bi bi-x-circle"></i>
+
+            <h2 style="text-align: center;">Details</h2>
+            <div class="grid-container">
+                <div>
+                    <div class="order-details">
+                        <h3>Order details</h3>
+                        <p>Toppings</p>
+                        <span style="color: black;"> {{ displayToppings(dialog.data?.toppings )}} </span>
+                        <div>QTY: {{ dialog.data?.quantity }}</div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="total-price flex align-items-end justify-content-between">
+                        <span>Total price</span>
+                        <span class="price">{{ dialog.data?.totalPrice | currency: 'USD'}}</span>
+                    </div>
+                </div>
+
+                <div class="shipping-information">
+                    <h3>Shipping information</h3>
+                    <div>
+                        <span class="label">Street name and number</span>
+                        <span>{{ dialog.data?.street}}</span>
+                    </div>
+
+                    <div>
+                        <span class="label">City</span>
+                        <span>{{ dialog.data?.city}}</span>
+                    </div>
+
+                    <div>
+                        <span class="label">Postal code</span>
+                        <span>{{ dialog.data?.postalCode}}</span>
+                    </div>
+
+                    <div>
+                        <span class="label">County</span>
+                        <span>{{ dialog.data?.county}}</span>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+</ng-container>

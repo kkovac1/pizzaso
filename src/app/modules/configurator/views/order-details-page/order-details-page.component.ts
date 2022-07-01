@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { IFormBuilder, IFormGroup } from '@rxweb/types';
+import { AuthService } from 'src/app/modules/shared/services/auth.service';
 import { Order } from '../../models/Order';
 import { Topping } from '../../models/Topping';
 import { ConfiguratorService } from '../../services/configurator.service';
@@ -23,6 +24,7 @@ export class OrderDetailsPageComponent implements OnInit {
 
   constructor(
     private configuratorService: ConfiguratorService,
+    private auth: AuthService,
     private router: Router,
     formBuilder: FormBuilder
   ) {
@@ -51,13 +53,7 @@ export class OrderDetailsPageComponent implements OnInit {
   }
 
   public get totalPrice() {
-    var toppingsTotalPrice = this.orderForm!.get('toppings')!.value!.reduce((acc, cur) => acc + cur.price, 0);
-    var pizzaPrice = this.orderForm?.get('pizzaSize')?.value?.price!;
-    var discount = this.orderForm?.get('discount')?.value?.percentage! / 100;
-    var quantity = this.orderForm?.get('quantity')?.value!;
-    var totalPrice = ((toppingsTotalPrice + pizzaPrice) - (toppingsTotalPrice + pizzaPrice) * discount) * quantity;
-
-    return totalPrice;
+    return this.orderForm?.value?.totalPrice;
   }
 
   getDiscount(code: string) {
@@ -68,8 +64,11 @@ export class OrderDetailsPageComponent implements OnInit {
   }
 
   finishOrder() {
-    console.log(this.orderForm!.value);
-    this.configuratorService.saveOrderData(this.orderForm?.value!).then(() => {
+    console.log(this.orderForm!.value?.orderedAt);
+    this.orderForm?.get('orderedAt')?.setValue(new Date());
+    this.auth.user$.pipe(
+    ).subscribe((user) => {
+      if (user) this.configuratorService.saveOrderData(this.orderForm?.value!, user.uid);
       this.router.navigate(['configurator/order-successful']);
     });
 

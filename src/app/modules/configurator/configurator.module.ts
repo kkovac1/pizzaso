@@ -7,6 +7,8 @@ import { ConfiguratorService } from './services/configurator.service';
 import { OrderDetailsPageComponent } from './views/order-details-page/order-details-page.component';
 import { ToppingComponent } from './components/topping/topping.component';
 import { OrderSuccessfulPageComponent } from './views/order-successful-page/order-successful-page.component';
+import { OrderHistoryPageComponent } from './views/order-history-page/order-history-page.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 
 
@@ -16,6 +18,8 @@ import { OrderSuccessfulPageComponent } from './views/order-successful-page/orde
     OrderDetailsPageComponent,
     ToppingComponent,
     OrderSuccessfulPageComponent,
+    OrderHistoryPageComponent,
+    DialogComponent,
   ],
   imports: [
     CommonModule,

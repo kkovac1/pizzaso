@@ -3,6 +3,7 @@ import * as auth from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { map, Observable, of, share, shareReplay, switchMap } from 'rxjs';
 import { User } from '../models/User';
 
 
@@ -12,6 +13,7 @@ import { User } from '../models/User';
 export class AuthService {
 
   public authenthicated$ = this.afAuth.authState;
+  public user$: Observable<User | null>;
 
   constructor(
     private afs: AngularFirestore,
@@ -19,9 +21,11 @@ export class AuthService {
     private router: Router
   ) {
 
-    this.afAuth.authState.subscribe((user) => {
-      console.log(user);
-    });
+    this.user$ = this.afAuth.authState.pipe()
+  }
+
+  get uid() {
+    return this.afAuth.currentUser.then(res => res?.uid)
   }
 
   signUpWithEmailAndPassword(email: string, password: string, displayName: string) {
