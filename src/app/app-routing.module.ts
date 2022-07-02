@@ -13,6 +13,8 @@ const routes: Routes = [
     loadChildren: () => import('./modules/configurator/configurator.module').then(m => m.ConfiguratorModule),
     canActivate: [AuthGuard]
   },
+  
+  
 ];
 
 @NgModule({

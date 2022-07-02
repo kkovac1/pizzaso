@@ -7,6 +7,10 @@ import { RegisterComponent } from './components/register/register.component';
 const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [LoggedInAuthGuard] },
     { path: 'register', component: RegisterComponent, canActivate: [LoggedInAuthGuard] },
+    {
+        path: '**',
+        loadChildren: () => import('../page-not-found/page-not-found.module').then(m => m.PageNotFoundModule),
+    },
 ];
 
 @NgModule({
