@@ -63,7 +63,6 @@ export class ConfiguratorPageComponent implements OnInit {
       this.toppingsArray.push(this.formBuilder.group<Topping>({ name: topping.name, price: topping.price, icon: topping.icon }));
     }
 
-    console.log(this.orderForm);
   }
 
   public setupActiveSize(pizza: PizzaSize) {
@@ -93,7 +92,6 @@ export class ConfiguratorPageComponent implements OnInit {
   }
 
   goToOrderDetails() {
-    console.log(this.orderForm.value);
     this.orderForm.get('totalPrice')?.setValue(this.totalPrice);
     this.configuratorService.sendOrderForm(this.orderForm);
     // this.configuratorService.sendOrderData(this.orderForm.value!);

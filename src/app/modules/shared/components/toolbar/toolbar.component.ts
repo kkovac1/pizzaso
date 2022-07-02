@@ -15,7 +15,7 @@ export class ToolbarComponent implements OnInit {
   constructor(
     private authService: AuthService
   ) { 
-    this.user$ = this.authService.authenthicated$;
+    this.user$ = this.authService.user$;
   }
 
   ngOnInit(): void {

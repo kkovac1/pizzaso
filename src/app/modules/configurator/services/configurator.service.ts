@@ -28,7 +28,6 @@ export class ConfiguratorService {
   getToppings(): Observable<Topping[]> {
     return this.afs.collection<Topping>('toppings').valueChanges().pipe(
       shareReplay(1),
-      tap(res => console.log(res))
     );
   }
 

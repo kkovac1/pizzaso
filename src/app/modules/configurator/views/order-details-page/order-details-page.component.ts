@@ -64,7 +64,6 @@ export class OrderDetailsPageComponent implements OnInit {
   }
 
   finishOrder() {
-    console.log(this.orderForm!.value?.orderedAt);
     this.orderForm?.get('orderedAt')?.setValue(new Date());
     this.auth.user$.pipe(
     ).subscribe((user) => {

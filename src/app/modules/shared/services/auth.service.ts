@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import * as auth from '@angular/fire/auth';
+import { GoogleAuthProvider, FacebookAuthProvider } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { map, Observable, of, share, shareReplay, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from '../models/User';
 
 
@@ -12,7 +12,6 @@ import { User } from '../models/User';
 })
 export class AuthService {
 
-  public authenthicated$ = this.afAuth.authState;
   public user$: Observable<User | null>;
 
   constructor(
@@ -48,7 +47,7 @@ export class AuthService {
   }
 
   signInViaGoogle() {
-    const provider = new auth.GoogleAuthProvider();
+    const provider = new GoogleAuthProvider();
     this.afAuth.signInWithPopup(provider).then(result => {
       const userData: User = {
         uid: result.user!.uid,
@@ -62,7 +61,7 @@ export class AuthService {
   }
 
   signInViaFacebook() {
-    const provider = new auth.FacebookAuthProvider();
+    const provider = new FacebookAuthProvider();
     this.afAuth.signInWithPopup(provider).then(result => {
       const userData: User = {
         uid: result.user!.uid,
