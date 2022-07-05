@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+@import '~ngx-toastr/toastr';
 
 $primary-color: #B95DE4;
 
@@ -19,6 +20,10 @@ body {
 
 * {
     font-family: 'Poppins', sans-serif;
+}
+
+.toast-top-center {
+    top: 2rem;
 }
 
 .flex {

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { IFormGroup } from '@rxweb/types';
-import { BehaviorSubject, from, map, Observable, shareReplay, Subject, tap } from 'rxjs';
-import { AuthService } from '../../shared/services/auth.service';
+import { BehaviorSubject, from, map, Observable, shareReplay } from 'rxjs';
 import { Discount } from '../models/Discount';
 import { Order } from '../models/Order';
 import { PizzaSize } from '../models/PizzaSize';
 import { Topping } from '../models/Topping';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,7 @@ export class ConfiguratorService {
 
   constructor(
     private afs: AngularFirestore,
+    private toastrService: ToastrService
   ) {
   }
 
@@ -41,7 +42,7 @@ export class ConfiguratorService {
   getDiscount(code: string): Observable<Discount | undefined> {
     return this.afs.doc<Discount>(`discount-codes/${code}`).valueChanges();
   }
-
+  
   saveOrderData(order: Order, uid: string) {
     let documentId = this.afs.createId();
     this.afs.doc(`order-history/orders/${uid}/${documentId}`).set(order);

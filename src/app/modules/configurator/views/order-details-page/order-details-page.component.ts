@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/modules/shared/services/auth.service';
 import { Order } from '../../models/Order';
 import { Topping } from '../../models/Topping';
 import { ConfiguratorService } from '../../services/configurator.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-order-details-page',
@@ -26,6 +27,7 @@ export class OrderDetailsPageComponent implements OnInit {
     private configuratorService: ConfiguratorService,
     private auth: AuthService,
     private router: Router,
+    private toastrService: ToastrService,
     formBuilder: UntypedFormBuilder
   ) {
     this.formBuilder = formBuilder;
@@ -67,7 +69,10 @@ export class OrderDetailsPageComponent implements OnInit {
     this.orderForm?.get('orderedAt')?.setValue(new Date());
     this.auth.user$.pipe(
     ).subscribe((user) => {
-      if (user) this.configuratorService.saveOrderData(this.orderForm?.value!, user.uid);
+      if (user) {
+        this.configuratorService.saveOrderData(this.orderForm?.value!, user.uid);
+        this.toastrService.success("Order successful!");
+      }
       this.router.navigate(['configurator/order-successful']);
     });
 
