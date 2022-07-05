@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { IFormArray, IFormBuilder, IFormGroup } from '@rxweb/types';
 import { Observable } from 'rxjs';
 import { Discount } from '../../models/Discount';
@@ -25,7 +25,7 @@ export class ConfiguratorPageComponent implements OnInit {
 
   constructor(
     private configuratorService: ConfiguratorService,
-    formBuilder: FormBuilder
+    formBuilder: UntypedFormBuilder
   ) {
     this.formBuilder = formBuilder;
     this.orderForm = this.formBuilder.group<Order>({

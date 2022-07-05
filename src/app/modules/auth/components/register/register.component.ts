@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { IFormGroup, IFormBuilder } from '@rxweb/types';
 import { AuthService } from 'src/app/modules/shared/services/auth.service';
 import { RegisterForm } from '../../models/RegisterForm';
@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    formBuilder: FormBuilder
+    formBuilder: UntypedFormBuilder
   ) {
     this.formBuilder = formBuilder;
     this.registerForm = this.formBuilder.group<RegisterForm>({

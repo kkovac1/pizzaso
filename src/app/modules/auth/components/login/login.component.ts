@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as auth from '@angular/fire/auth';
 import { User } from '../../../shared/models/User';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { IFormBuilder, IFormGroup } from '@rxweb/types';
 import { LoginForm } from '../../models/LoginForm';
 import { AuthService } from 'src/app/modules/shared/services/auth.service';
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    formBuilder: FormBuilder
+    formBuilder: UntypedFormBuilder
   ) {
     this.formBuilder = formBuilder;
 

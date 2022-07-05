@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IFormBuilder, IFormGroup } from '@rxweb/types';
 import { AuthService } from 'src/app/modules/shared/services/auth.service';
@@ -26,7 +26,7 @@ export class OrderDetailsPageComponent implements OnInit {
     private configuratorService: ConfiguratorService,
     private auth: AuthService,
     private router: Router,
-    formBuilder: FormBuilder
+    formBuilder: UntypedFormBuilder
   ) {
     this.formBuilder = formBuilder;
     this.configuratorService.orderData$.subscribe(res => {
